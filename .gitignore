@@ -1,32 +1,241 @@
-# Prerequisites
-*.d
+        
+        #include<iostream>
+        #include <fstream>
+        using namespace std;
+        struct student{
+        string shomarehdanshjooi;
+        string namedanshjoo;
+            int sen;
+            float moadel;
+        };  student d[100];
+      int studenti=0;
+        void fallshodanfile() {
+            ifstream file("students.txt");
+            studenti=0;
+            while(file>>d[studenti].shomarehdanshjooi>>d[studenti].namedanshjoo
+            >>d[studenti].sen>>d[studenti].moadel){
+                studenti++;
+            }
+            file.close();
+        }
+        void zakherhdarfile() {
+            ofstream file("students.txt");
+            for(int i=0;i<studenti;i++)
+            {
+                file<<d[i].shomarehdanshjooi<<" , \t "
+                <<d[i].namedanshjoo<<"  , \t"<<d[i].sen<<" ,\t"<<d[i].moadel<<endl;
+            }
+            file.close();
+            
+            }
+        void joostoojo() {
+            string a;
+            cout<<"name && shomarehdanshjooi ra vared koind"<<endl;
+            cin>>a;
+            bool found=false;
+            for(int i=0;i<studenti;i++)
+            
+        {
+            if(a==d[i].shomarehdanshjooi || a==d[i].namedanshjoo)
+            {cout<<"yaftshod"<<d[i].shomarehdanshjooi<<" "
+            <<d[i].namedanshjoo<<" "<<d[i].sen<<" "<<d[i].moadel<<endl;
+            found=true;
+            break;
+            }
+            
+            }
+            if (!found){
+                cout<<"chizi yaftb nashod"<<endl;
+            }
+        }
+    
+        void adddanshjoo() {
+            
+            if(studenti >= 100)
+            
+            {
+                cout<<"class fool shodeh"<<endl;
+                return;
+            }
+            int n;
+            
+            cout<<"chand adad danshjoo ra mikhahed azafeh konid"<<endl;
+            cin>>n;
+            for(int i=0;i<n;i++)
+            {
+            cout<<"shomarehdanshjooi ra vared konid"<<endl;
+            cin>>d[i].shomarehdanshjooi;
+            cout<<"name dashjoo"<<endl;
+        cin>>d[i].namedanshjoo;
+        cout<<"sen danshjooo"<<endl;
+        cin>>d[i].sen;
+        cout<<"moadel"<<endl;
+        cin>>d[i].moadel;
+        studenti++;
+        cout<<"\tdanshjoo ba mofghit sabt shod"<<endl;
+            }
+        zakherhdarfile();//zakherh sazi dansh joo azafeh dar file k agr vaghti brnameh basteh shod
+        //dar file save shavad v be ma neshan dahd
+        }
+        void neshandadnetlaat()
+        {
+            for(int i=0;i<studenti;i++)
+            {
+                cout<<i+1<<"     "<<d[i].shomarehdanshjooi
+        <<" "<<d[i].namedanshjoo<<" "<<d[i].sen<<" "<<d[i].moadel<<endl;
+            }
+        }
+        void hazfdanshjooo() {
+            string a;
+            cout<<"name ya shomareh dansh joo ra vared konmid"<<endl;
+        cin>>a;
+        for(int i=0;i<studenti;i++)
+            {
+                if(d[i].shomarehdanshjooi==a || d[i].namedanshjoo==a){
+                    for(int j=i;j<studenti-1;j++){
+                        d[j]=d[j+1];
+                    }
+                    studenti--;
+                    cout<<"danshjoo hazf shod"<<endl;
+                    zakherhdarfile();
+                    return;
+                    
+                }
+                
+            
+            }
+                
+            
+            cout<<"chizi yaft nashod"<<endl;
+            }
+        void broozrasanidanshjoo() {
+          string a;
+          
+            cout<<"shomareh danshjoii shkas ya name on ra vred konid"<<endl;
+            cin>>a;
+            
+            bool found=false;
+            for(int i=0;i<studenti;i++)
+            {
+                if(a==d[i].namedanshjoo  ||  a==d[i].shomarehdanshjooi)
+                {
+                    cout<<"danshjoo mored nazar pida shod"<<endl;
+                    cout<<"moadl jadid vared konmiod"<<endl;
+                    cin>>d[i].moadel;
+                    
+                    cout<<"sen jadid ra vared konid"<<endl;
+                    cin>>d[i].sen;
+                   cout<<"ba mofgit anjam shod"<<endl;
+                   zakherhdarfile();
+                   found=true;
+                   break;
+                   
+                }
+               
+            
+                }
+                if(!found)
+                {
+                    cout<<"chizi yaft nashod"<<endl;
+                }
+                
+                }
+                
+                void mortabsazi()
+            {
+                for(int i=0;i<studenti - 1;i++)
+                {
+                    for(int j=i + 1;j<studenti;j++){
+                        if(d[i].moadel<d[j].moadel){
+                            swap(d[i],d[j]);
+                        }
+                    }
+                }
+                   cout<<"moratab shod"<<endl;
+            neshandadnetlaat();
+            
+                
+            }
+            int main()
+            {
+                int n;
+                
+                while(true){
+                cout<<"\ngozineh moredd nazar braei amliatt intkhab konid\n";
+                cout<<"1-afzoodan danshjoo"<<endl;
+                cout<<"2-joostojoo danshjoo"<<endl;
+                cout<<"3-namaesh hameh danshjoo"<<endl;
+                cout<<"4-hazf dansh joo"<<endl;
+                cout<<"5-tagir etlaat danshjoo"<<endl;
+                cout<<"6- mortab sazi br asas sen moadel;"<<endl;
+                cout<<"7- EXIT "<<endl;
+                
+        cin>>n;
+        
+                
+                
+                switch(n){
+                    
+                    case 1:{
+                        
+                    adddanshjoo();
+                    break;
+                        
+                    }
+                    case 2:{
+                        joostoojo();
+                        break;
+                    }
+                    case 3:
+                    {
+                        neshandadnetlaat();
+                        break;
+                    }
+                    case 4:
+                    {
+                        hazfdanshjooo();
+                        break;
+                    }
+                    case 5:
+                    {
+                        broozrasanidanshjoo();
+                        break;
+                    }
+                    case 6:
+                    {
+                        mortabsazi();
+                        break;
+                    
+                    }
+                    case 7:
+                    {
+                        cout<<"khooroooj az brnameh ba mofgit anjam shod"<<endl;
+                        return 0;
+                        
+                    }
+                    
+                default:cout<<"gozineh sahih ra vared konid"<<endl;
+                    
+                    
+        
+                    
+                }
+                
+            }
+         
+            
+}
+        
+        
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+        
+        
+            
+        
+        
+        
+        
+        
+        
+        
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
